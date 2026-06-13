@@ -1,0 +1,265 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Background layers */
+  --background: #08080D;
+  --elevated: #0C0C14;
+  --surface: #111118;
+
+  /* Text / foreground */
+  --foreground: rgba(255, 255, 255, 0.9);
+  --foreground-secondary: rgba(255, 255, 255, 0.6);
+  --foreground-tertiary: rgba(255, 255, 255, 0.35);
+  --foreground-disabled: rgba(255, 255, 255, 0.18);
+
+  /* Semantic colors — iOS native */
+  --primary: #007AFF;
+  --primary-foreground: #ffffff;
+  --primary-subtle: rgba(0, 122, 255, 0.12);
+  --primary-border: rgba(0, 122, 255, 0.25);
+
+  --success: #34C759;
+  --success-subtle: rgba(52, 199, 89, 0.12);
+
+  --warning: #FF9500;
+  --warning-subtle: rgba(255, 149, 0, 0.12);
+
+  --destructive: #FF3B30;
+  --destructive-subtle: rgba(255, 59, 48, 0.12);
+
+  /* Component colors */
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(255, 255, 255, 0.06);
+
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: rgba(255, 255, 255, 0.9);
+
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted-foreground: rgba(255, 255, 255, 0.35);
+
+  --accent: rgba(0, 122, 255, 0.12);
+  --accent-foreground: rgba(0, 122, 255, 0.9);
+
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(0, 122, 255, 0.4);
+
+  /* Chart colors */
+  --chart-1: #007AFF;
+  --chart-2: #5856D6;
+  --chart-3: #34C759;
+  --chart-4: #FF9500;
+  --chart-5: #FF3B30;
+
+  /* Radius system */
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Sidebar — glass material */
+  --sidebar: rgba(255, 255, 255, 0.05);
+  --sidebar-foreground: rgba(255, 255, 255, 0.85);
+  --sidebar-primary: #007AFF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(0, 122, 255, 0.12);
+  --sidebar-accent-foreground: rgba(0, 122, 255, 0.9);
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: rgba(0, 122, 255, 0.3);
+}
+
+/* Dark = default, .dark mirrors :root */
+.dark {
+  --background: #08080D;
+  --elevated: #0C0C14;
+  --surface: #111118;
+  --foreground: rgba(255, 255, 255, 0.9);
+  --foreground-secondary: rgba(255, 255, 255, 0.6);
+  --foreground-tertiary: rgba(255, 255, 255, 0.35);
+  --foreground-disabled: rgba(255, 255, 255, 0.18);
+  --primary: #007AFF;
+  --primary-foreground: #ffffff;
+  --primary-subtle: rgba(0, 122, 255, 0.12);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-foreground: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: rgba(255, 255, 255, 0.9);
+  --muted: rgba(255, 255, 255, 0.04);
+  --muted-foreground: rgba(255, 255, 255, 0.35);
+  --accent: rgba(0, 122, 255, 0.12);
+  --accent-foreground: rgba(0, 122, 255, 0.9);
+  --destructive: #FF3B30;
+  --destructive-subtle: rgba(255, 59, 48, 0.12);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: rgba(0, 122, 255, 0.4);
+  --chart-1: #007AFF;
+  --chart-2: #5856D6;
+  --chart-3: #34C759;
+  --chart-4: #FF9500;
+  --chart-5: #FF3B30;
+  --sidebar: rgba(255, 255, 255, 0.05);
+  --sidebar-foreground: rgba(255, 255, 255, 0.85);
+  --sidebar-primary: #007AFF;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(0, 122, 255, 0.12);
+  --sidebar-accent-foreground: rgba(0, 122, 255, 0.9);
+  --sidebar-border: rgba(255, 255, 255, 0.05);
+  --sidebar-ring: rgba(0, 122, 255, 0.3);
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Inter Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+
+  /* Background */
+  --color-background: var(--background);
+  --color-elevated: var(--elevated);
+  --color-surface: var(--surface);
+
+  /* Foreground */
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-foreground-tertiary: var(--foreground-tertiary);
+  --color-foreground-disabled: var(--foreground-disabled);
+
+  /* Semantic */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-border: var(--primary-border);
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-destructive: var(--destructive);
+  --color-destructive-subtle: var(--destructive-subtle);
+
+  /* Component */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-border: var(--card-border);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Chart */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ====== Glass Utilities ====== */
+@utility glass-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility glass-mid {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+@utility glass-heavy {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* ====== Typography Utilities ====== */
+@utility text-hero {
+  font-size: 3.5rem;
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+@utility text-data {
+  font-size: 2.625rem;
+  font-weight: 200;
+  letter-spacing: -0.04em;
+}
+
+@utility text-section-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--foreground-tertiary);
+}
+
+/* ====== iOS Group Container ====== */
+@utility ios-group {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+@utility ios-group-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+@utility ios-group-row-last {
+  border-bottom: none;
+}
