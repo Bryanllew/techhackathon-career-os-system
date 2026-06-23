@@ -1,10 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Pencil, Briefcase, Calendar, MapPin, Target } from "lucide-react"
+import { Pencil, Briefcase, Calendar, MapPin, Target, Brain } from "lucide-react"
+
+type AnimalType = "wolf" | "eagle" | "dolphin" | "fox" | "bear"
+
+const animalInfo: Record<AnimalType, { emoji: string; name: string; tagline: string; traits: string[] }> = {
+ wolf: { emoji: "🐺", name: "Wolf", tagline: "Natural Leader", traits: ["Decisive", "Team-oriented", "Protective"] },
+ eagle: { emoji: "🦅", name: "Eagle", tagline: "Strategic Thinker", traits: ["Visionary", "Independent", "Analytical"] },
+ dolphin: { emoji: "🐬", name: "Dolphin", tagline: "The Connector", traits: ["Empathetic", "Collaborative", "Communicative"] },
+ fox: { emoji: "🦊", name: "Fox", tagline: "Creative Solver", traits: ["Adaptable", "Creative", "Curious"] },
+ bear: { emoji: "🐻", name: "Bear", tagline: "Reliable Executor", traits: ["Detail-oriented", "Dependable", "Thorough"] },
+}
 
 const workHistory = [
  {
@@ -41,6 +52,15 @@ const skills = {
 
 export default function ProfilePage() {
  const [isEditing, setIsEditing] = useState(false)
+ const [animalType, setAnimalType] = useState<AnimalType | null>(null)
+
+ useEffect(() => {
+  const stored = localStorage.getItem("animalType")
+  if (stored) {
+   const parsed = JSON.parse(stored)
+   setAnimalType(parsed.primary as AnimalType)
+  }
+ }, [])
 
  return (
   <div className="min-h-screen p-8">
@@ -72,7 +92,14 @@ export default function ProfilePage() {
 
       {/* Info */}
       <div className="flex-1">
-       <h2 className="text-xl font-semibold text-foreground">Alex Chen</h2>
+       <div className="flex items-center gap-3 flex-wrap">
+        <h2 className="text-xl font-semibold text-foreground">Alex Chen</h2>
+        {animalType && (
+         <Badge className="gap-1.5 text-sm px-3 py-1 bg-primary/10 text-primary border-primary/20">
+          {animalInfo[animalType].emoji} {animalInfo[animalType].name} Type
+         </Badge>
+        )}
+       </div>
        <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
         <span className="flex items-center gap-1">
          <Briefcase className="h-4 w-4" />
@@ -193,6 +220,47 @@ export default function ProfilePage() {
        </div>
       </div>
      </div>
+    </CardContent>
+   </Card>
+
+   {/* Work Style（动物类型） */}
+   <Card className="mb-8 border-border/60 bg-card/50">
+    <CardHeader className="flex flex-row items-center justify-between">
+     <CardTitle className="flex items-center gap-2 text-lg">
+      <Brain className="h-5 w-5 text-primary" />
+      Work Style
+     </CardTitle>
+     <Button variant="outline" size="sm" asChild>
+      <Link href="/candidate/dashboard/quiz">
+       {animalType ? "Retake Quiz" : "Take Quiz"}
+      </Link>
+     </Button>
+    </CardHeader>
+    <CardContent>
+     {animalType ? (
+      <div className="flex items-start gap-4">
+       <span className="text-4xl">{animalInfo[animalType].emoji}</span>
+       <div>
+        <p className="font-medium text-foreground text-lg">
+         {animalInfo[animalType].name} — {animalInfo[animalType].tagline}
+        </p>
+        <div className="flex gap-2 mt-2 flex-wrap">
+         {animalInfo[animalType].traits.map((t) => (
+          <Badge key={t} variant="secondary">{t}</Badge>
+         ))}
+        </div>
+       </div>
+      </div>
+     ) : (
+      <div className="text-center py-4">
+       <p className="text-sm text-foreground-secondary mb-3">
+        Take the personality quiz to discover your work animal type.
+       </p>
+       <Button size="sm" asChild>
+        <Link href="/candidate/dashboard/quiz">Start Quiz</Link>
+       </Button>
+      </div>
+     )}
     </CardContent>
    </Card>
 

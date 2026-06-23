@@ -2,10 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, TrendingUp, Target, Clock, Lightbulb, Calendar, Users, CheckCircle2 } from "lucide-react"
+import { TrendingUp, Target, Clock, Lightbulb, Calendar, Users, ArrowLeft } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 
 // ── Paths ──────────────────────────────────────────────
 
@@ -90,7 +89,6 @@ const comparison = [
 
 export default function TrajectoryPage() {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null)
-  const [notifyClicked, setNotifyClicked] = useState(false)
 
   return (
     <div className="min-h-screen p-8">
@@ -281,30 +279,46 @@ export default function TrajectoryPage() {
         </CardContent>
       </Card>
 
-      {/* ── Life Chapter Designer Teaser ──────────────── */}
-      <Card className="border-2 border-dashed border-border/60 bg-card/30">
-        <CardContent className="flex items-center gap-6 p-6">
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary">
-            <Calendar className="h-7 w-7 text-foreground-tertiary" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-[15px] font-semibold text-foreground">Planning a career break?</h3>
-            <p className="mt-0.5 text-[13px] text-muted-foreground">Life Chapter Designer — coming soon</p>
-          </div>
-          <Button
-            variant="outline"
-            className="h-9 shrink-0 text-[12px]"
-            onClick={() => setNotifyClicked(true)}
-            disabled={notifyClicked}
-          >
-            {notifyClicked ? (
-              <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-success" />You're on the list</span>
-            ) : (
-              "Notify me when it launches"
-            )}
-          </Button>
-        </CardContent>
-      </Card>
+      {/* ── 交叉链接区 ──────────────────────────────────── */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Life Chapters 链接（真实链接，不再是 teaser） */}
+        <Card className="border-card-border bg-card/60">
+          <CardContent className="flex items-center gap-4 p-5">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 flex-shrink-0">
+              <Calendar className="h-5 w-5 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground">Planning a career break?</p>
+              <p className="text-xs text-foreground-secondary mt-0.5">Design your life chapters around your career — not against it.</p>
+            </div>
+            <Link
+              href="/candidate/dashboard/chapters"
+              className="text-xs text-primary hover:underline flex-shrink-0 ml-2"
+            >
+              Open Life Chapters →
+            </Link>
+          </CardContent>
+        </Card>
+
+        {/* Skills 链接 */}
+        <Card className="border-card-border bg-card/60">
+          <CardContent className="flex items-center gap-4 p-5">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 flex-shrink-0">
+              <TrendingUp className="h-5 w-5 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground">See your skill gaps in detail</p>
+              <p className="text-xs text-foreground-secondary mt-0.5">Skills Gap Analysis breaks down exactly what to learn per role.</p>
+            </div>
+            <Link
+              href="/candidate/dashboard/skills"
+              className="text-xs text-primary hover:underline flex-shrink-0 ml-2"
+            >
+              View Skills →
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

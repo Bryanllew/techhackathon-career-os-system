@@ -193,6 +193,20 @@ export default function SkillsGapPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* 交叉链接 */}
+      <div className="mt-6 rounded-xl border border-card-border bg-card/60 p-4 flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-foreground">Want to see your full career path?</p>
+          <p className="text-xs text-foreground-secondary mt-0.5">Trajectory shows timelines, salary milestones, and peer data for each path.</p>
+        </div>
+        <Link
+          href="/candidate/dashboard/trajectory"
+          className="text-sm text-primary hover:underline flex-shrink-0 ml-4"
+        >
+          View Trajectory →
+        </Link>
+      </div>
     </div>
   )
 }
